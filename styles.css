@@ -6,8 +6,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background: #1a1a1a url("../images/Screenshot-court.webp") no-repeat center
-    center fixed;
+  background: #1a1a1a url("../images/bg.webp") no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
   color: #333;
@@ -330,7 +329,7 @@ h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("../images/texture-wood.png");
+  background: url("../images/go.png");
   opacity: 0.03;
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -402,7 +401,7 @@ h2 {
       rgba(255, 255, 255, 0.2) 0%,
       rgba(255, 255, 255, 0) 60%
     ),
-    url("../images/texture-wood.png");
+    url("../images/go.png");
   background-blend-mode: overlay;
   opacity: 0.9;
 }
