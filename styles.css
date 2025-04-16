@@ -186,17 +186,21 @@ h2 {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(139, 69, 19, 0.1);
   transform: translateZ(15px);
+  position: relative;
 }
 
 .buttons {
   margin-top: 2rem;
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  transform: translateZ(20px);
+  justify-content: flex-start; /* Thay đổi thành flex-start */
+  gap: 2rem;
+  padding: 0 4rem;
+  position: relative;
+  min-height: 60px; /* Thêm chiều cao tối thiểu để tránh collapse */
 }
 
 .btn {
+  min-width: 200px; /* Thêm chiều rộng tối thiểu cho nút */
   padding: 1.2rem 2.5rem;
   border: none;
   border-radius: 5px;
@@ -241,6 +245,7 @@ h2 {
   background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  margin-right: auto; /* Đẩy nút mercy sang trái */
 }
 
 .mercy:hover {
@@ -252,6 +257,7 @@ h2 {
   background: linear-gradient(135deg, #8b0000 0%, #ff0000 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+  z-index: 1; /* Đảm bảo nút luôn ở trên cùng */
 }
 
 .no-mercy:hover {
@@ -417,10 +423,14 @@ h2 {
 
   .buttons {
     flex-direction: column;
+    align-items: center;
+    padding: 0 2rem;
+    min-height: 120px; /* Tăng chiều cao cho mobile */
   }
 
   .btn {
     width: 100%;
+    max-width: 300px; /* Giới hạn chiều rộng tối đa trên mobile */
     margin-bottom: 1rem;
   }
 }
