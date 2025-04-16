@@ -7,10 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const holdItSound = document.getElementById("holdItSound");
   const takeThatSound = document.getElementById("takeThatSound");
 
-  // Phát âm thanh khi trang web được tải
+  // Đảm bảo nhạc nền phát khi trang được tải
   courtAudio.play().catch((error) => {
-    console.log("Không thể phát âm thanh tự động:", error);
+    console.log(
+      "Tự động phát nhạc bị chặn. Vui lòng tương tác với trang để phát nhạc."
+    );
   });
+
+  // Thêm sự kiện click cho toàn bộ trang để bắt đầu phát nhạc
+  document.body.addEventListener(
+    "click",
+    function () {
+      courtAudio.play().catch(function (error) {
+        console.log("Lỗi phát nhạc:", error);
+      });
+    },
+    { once: true }
+  );
 
   // Hiệu ứng nút "không khoan hồng" di chuyển
   noMercyBtn.addEventListener("mouseover", () => {
@@ -70,12 +83,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ẩn bản án ban đầu
   verdict.style.display = "none";
-
-  const chargesBtn = document.querySelector(".charges-btn");
-  const chargesList = document.querySelector(".charges-list");
-
-  chargesBtn.addEventListener("click", function () {
-    chargesList.classList.toggle("active");
-    chargesBtn.classList.toggle("active");
-  });
 });
