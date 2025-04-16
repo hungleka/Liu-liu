@@ -6,27 +6,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const holdItSound = document.getElementById("holdItSound");
   const takeThatSound = document.getElementById("takeThatSound");
 
-  // Xử lý di chuyển nút không khoan hồng
-  noMercyBtn.addEventListener("mouseover", (event) => {
-    const defenseBox = document
-      .querySelector(".defense")
-      .getBoundingClientRect();
-    const btnRect = noMercyBtn.getBoundingClientRect();
+  // 5 vị trí cố định cho nút
+  const positions = [
+    { x: 20, y: 20 }, // Góc trên trái
+    { x: 20, y: 150 }, // Giữa trái
+    { x: 400, y: 80 }, // Giữa phải
+    { x: 200, y: 20 }, // Giữa trên
+    { x: 350, y: 150 }, // Góc dưới phải
+  ];
 
-    let newX = Math.random() * (defenseBox.width - btnRect.width - 40);
-    let newY = Math.random() * (defenseBox.height - btnRect.height - 40);
+  let currentPosition = 0;
 
-    // Đảm bảo nút không di chuyển ra ngoài vùng cho phép
-    newX = Math.max(20, Math.min(newX, defenseBox.width - btnRect.width - 20));
-    newY = Math.max(
-      20,
-      Math.min(newY, defenseBox.height - btnRect.height - 20)
-    );
+  function moveButton() {
+    // Chuyển đến vị trí tiếp theo
+    currentPosition = (currentPosition + 1) % positions.length;
 
     noMercyBtn.style.position = "absolute";
-    noMercyBtn.style.left = `${newX}px`;
-    noMercyBtn.style.top = `${newY}px`;
-    noMercyBtn.style.transform = "none";
+    noMercyBtn.style.transition = "all 0.1s ease-out";
+    noMercyBtn.style.left = `${positions[currentPosition].x}px`;
+    noMercyBtn.style.top = `${positions[currentPosition].y}px`;
 
     // Phát âm thanh ngẫu nhiên
     const sounds = [objectionSound, holdItSound, takeThatSound];
@@ -35,24 +33,23 @@ document.addEventListener("DOMContentLoaded", () => {
     randomSound
       .play()
       .catch((error) => console.log("Không thể phát âm thanh:", error));
-  });
+  }
 
-  // Xử lý nút khoan hồng
+  // Thêm sự kiện mouseover để nút nhảy khi di chuột vào
+  noMercyBtn.addEventListener("mouseover", moveButton);
+
   mercyBtn.addEventListener("click", () => {
     verdict.style.display = "block";
     verdict.scrollIntoView({ behavior: "smooth" });
     verdict.style.opacity = "0";
     verdict.style.transition = "opacity 1s";
-
     setTimeout(() => {
       verdict.style.opacity = "1";
     }, 100);
-
     objectionSound
       .play()
       .catch((error) => console.log("Không thể phát âm thanh:", error));
   });
 
-  // Ẩn bản án ban đầu
   verdict.style.display = "none";
 });
